@@ -167,9 +167,7 @@ onMounted(fetchCart)
         Select All
       </label>
 
-      <button
-        @click="placeBulkOrder"
-        :disabled="selectedCartItems.length === 0"
+      <button @click="placeBulkOrder" :disabled="selectedCartItems.length === 0"
         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
         <i class="fa-solid fa-credit-card"></i> Place Order Selected
       </button>
@@ -180,13 +178,12 @@ onMounted(fetchCart)
       class="bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-5 hover:shadow-2xl transition-shadow duration-300 flex flex-col md:flex-row"
       style="min-height: 140px;">
 
-      <!-- Selection Checkbox -->
-      <div class="absolute m-2">
-        <input type="checkbox" v-model="selectedCartItems" :value="item.product_id" class="w-4 h-4 accent-blue-500">
-      </div>
-
       <!-- Image -->
-      <div class="md:w-1/4 h-40 md:h-auto overflow-hidden">
+      <div class=" relative md:w-1/4 h-40 md:h-auto overflow-hidden">
+        <!-- Selection Checkbox -->
+        <div class=" absolute m-2">
+          <input type="checkbox" v-model="selectedCartItems" :value="item.product_id" class="w-4 h-4 accent-blue-500">
+        </div>
         <img :src="item.tile_image" class="w-full h-full object-cover" alt="Tile Image" />
       </div>
 
@@ -210,29 +207,17 @@ onMounted(fetchCart)
             <div class="flex items-center gap-2">
               <label class="text-gray-300">Qty:</label>
               <div class="flex items-center bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                <button
-                  @click="item.quantity = Math.max(1, item.quantity - 1)"
-                  class="px-3 py-1 hover:bg-gray-600 text-gray-300 text-lg"
-                  :disabled="item.quantity <= 1"
-                >
+                <button @click="item.quantity = Math.max(1, item.quantity - 1)"
+                  class="px-3 py-1 hover:bg-gray-600 text-gray-300 text-lg" :disabled="item.quantity <= 1">
                   <i class="fa-solid fa-minus"></i>
                 </button>
-                <input
-                  type="number"
-                  v-model.number="item.quantity"
-                  min="1"
-                  :max="item.tile_stock"
-                  @input="() => {
-                    if (item.quantity > item.tile_stock) item.quantity = item.tile_stock;
-                    if (item.quantity < 1) item.quantity = 1;
-                  }"
-                  class="w-16 text-center bg-gray-800 text-white outline-none border-x border-gray-600"
-                />
-                <button
-                  @click="item.quantity = Math.min(item.tile_stock, item.quantity + 1)"
+                <input type="number" v-model.number="item.quantity" min="1" :max="item.tile_stock" @input="() => {
+                  if (item.quantity > item.tile_stock) item.quantity = item.tile_stock;
+                  if (item.quantity < 1) item.quantity = 1;
+                }" class="w-16 text-center bg-gray-800 text-white outline-none border-x border-gray-600" />
+                <button @click="item.quantity = Math.min(item.tile_stock, item.quantity + 1)"
                   class="px-3 py-1 hover:bg-gray-600 text-gray-300 text-lg"
-                  :disabled="item.quantity >= item.tile_stock"
-                >
+                  :disabled="item.quantity >= item.tile_stock">
                   <i class="fa-solid fa-plus"></i>
                 </button>
               </div>
