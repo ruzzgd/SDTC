@@ -61,7 +61,7 @@ const loginAdmin = async () => {
 </script>
 
 <template>
-  <div class="h-screen w-full flex items-center justify-center bg-gray-900 text-white">
+  <div class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-300 via-gray-400 to-gray-500 text-white">
     <div class="bg-gray-800 rounded-2xl shadow-lg p-10 w-[350px] md:w-[400px] flex flex-col gap-6">
       <h1 class="text-2xl font-bold text-center mb-4">Admin Login</h1>
 

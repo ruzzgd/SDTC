@@ -2,10 +2,10 @@
   <div class="feedback-container p-6 max-w-xl mx-auto">
     <!-- Feedback Summary -->
     <div
-      class="summary-card mb-6 p-6 rounded-xl shadow-lg bg-gradient-to-r from-gray-800 to-gray-900 text-white flex flex-col items-center"
+      class="summary-card mb-6 p-6 rounded-xl shadow-lg bg-gradient-to-r from-gray-300 to-gray-400 flex flex-col items-center"
     >
-      <h2 class="text-2xl font-bold mb-2">Customer Feedback</h2>
-      <p class="text-gray-400 mb-2">
+      <h2 class="text-2xl font-bold mb-2 text-gray-900">Customer Feedback</h2>
+      <p class="text-gray-700 mb-2">
         Total Feedbacks: <span class="font-semibold">{{ feedbackList.length }}</span>
       </p>
       <div class="flex items-center">
@@ -14,26 +14,26 @@
             {{ i <= Math.round(avgRating) ? '★' : '☆' }}
           </span>
         </div>
-        <span class="ml-2 text-gray-400 text-lg">{{ avgRating.toFixed(1) }}</span>
+        <span class="ml-2 text-gray-900 text-lg">{{ avgRating.toFixed(1) }}</span>
       </div>
     </div>
 
     <!-- Feedback Form -->
-    <form @submit.prevent="submitFeedback" class="mb-6 p-6 bg-gray-900 rounded-xl shadow-md">
+    <form @submit.prevent="submitFeedback" class="mb-6 p-6 bg-gradient-to-r from-gray-300 to-gray-400 rounded-xl shadow-md">
       <div class="mb-4">
-        <label for="description" class="block font-semibold mb-1 text-gray-200">Your Feedback</label>
+        <label for="description" class="block font-semibold mb-1 text-gray-900">Your Feedback</label>
         <textarea
           id="description"
           v-model="form.description"
           rows="4"
           required
           placeholder="Write your thoughts..."
-          class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full p-3 rounded-lg bg-gray-300 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
         ></textarea>
       </div>
 
       <div class="mb-4">
-        <label class="block font-semibold mb-1 text-gray-200">Rating</label>
+        <label class="block font-semibold mb-1 text-gray-900">Rating</label>
         <div class="flex space-x-2">
           <button
             v-for="n in 5"
@@ -63,12 +63,12 @@
         <li
           v-for="item in feedbackList"
           :key="item.id"
-          class="p-4 bg-gray-800 rounded-xl shadow hover:shadow-lg transition-shadow flex justify-between items-start"
+          class="p-4 bg-gradient-to-r from-gray-300 to-gray-400 rounded-xl shadow hover:shadow-lg transition-shadow flex justify-between items-start"
         >
           <div class="flex-1">
-            <p class="font-semibold text-gray-100">{{ item.email }}</p>
-            <p class="text-sm text-gray-400">{{ formatDate(item.created_at) }}</p>
-            <p class="mt-2 text-gray-200">{{ item.description }}</p>
+            <p class="font-semibold text-gray-900">{{ item.email }}</p>
+            <p class="text-sm text-gray-700">{{ formatDate(item.created_at) }}</p>
+            <p class="mt-2 text-gray-900">{{ item.description }}</p>
           </div>
           <div class="flex flex-col justify-start ml-4">
             <div class="flex text-yellow-400 text-xl">

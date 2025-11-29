@@ -21,9 +21,9 @@ const scrollToSection = (section: HTMLElement | null) => {
 </script>
 
 <template>
-  <div class="min-h-screen w-full flex flex-col bg-gray-900 text-white relative">
+  <div class="min-h-screen w-full flex flex-col bg-gray-200 text-gray-900 relative">
     <!-- Header / Navbar -->
-    <header class="flex h-[80px] w-full bg-gray-800 sticky top-0 px-6 justify-between items-center shadow-lg z-50">
+    <header class="flex h-[80px] w-full bg-gray-100 sticky top-0 px-6 justify-between items-center shadow-lg z-50">
       <!-- Logo -->
       <div class="flex items-center gap-3">
         <img src="@/assets/img/sdtc-logo.jpg" alt="SDTC Logo" class="h-[50px] rounded-2xl" />
@@ -53,7 +53,7 @@ const scrollToSection = (section: HTMLElement | null) => {
       v-if="isMenuOpen"
       class="fixed inset-0 bg-black/70 flex justify-center items-center z-50"
     >
-      <div class="bg-gray-800 w-3/4 max-w-xs p-6 rounded-lg flex flex-col gap-4 relative">
+      <div class="bg-gray-200 w-3/4 max-w-xs p-6 rounded-lg flex flex-col gap-4 relative">
         <!-- Close Button -->
         <button class="absolute top-4 right-4 text-xl" @click="isMenuOpen = false">
           <i class="fa-solid fa-xmark"></i>
@@ -84,9 +84,9 @@ const scrollToSection = (section: HTMLElement | null) => {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 py-6 px-6 text-center mt-auto">
+    <footer class="bg-gray-200 py-6 px-6 text-center mt-auto">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm text-gray-400">&copy; 2025 SDTC. All rights reserved.</p>
+        <p class="text-sm text-gray-900">&copy; 2025 SDTC. All rights reserved.</p>
       </div>
     </footer>
   </div>

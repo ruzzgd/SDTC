@@ -151,18 +151,18 @@ onMounted(fetchCart)
 
 <template>
   <div class="w-full max-w-4xl mx-auto p-4">
-    <h1 class="text-3xl font-bold mb-6 text-gray-100 flex items-center gap-3">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 flex items-center gap-3">
       <i class="fa-solid fa-cart-shopping text-yellow-400"></i>
       Your Cart
     </h1>
 
-    <div v-if="cartItems.length === 0" class="text-gray-400 text-center py-10">
+    <div v-if="cartItems.length === 0" class="text-gray-600 text-center py-10">
       Your cart is empty.
     </div>
 
     <!-- Select All & Bulk Order -->
     <div v-if="cartItems.length > 0" class="flex items-center justify-between mb-4">
-      <label class="flex items-center gap-2 text-gray-300 cursor-pointer">
+      <label class="flex items-center gap-2 text-gray-600 cursor-pointer">
         <input type="checkbox" v-model="selectAllCart" class="w-5 h-5 accent-blue-500">
         Select All
       </label>
@@ -175,7 +175,7 @@ onMounted(fetchCart)
 
     <!-- Cart Items -->
     <div v-for="(item, index) in cartItems" :key="item.cartId"
-      class="bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-5 hover:shadow-2xl transition-shadow duration-300 flex flex-col md:flex-row"
+      class="bg-gray-300 rounded-xl shadow-lg overflow-hidden mb-5 hover:shadow-2xl transition-shadow duration-300 flex flex-col md:flex-row"
       style="min-height: 140px;">
 
       <!-- Image -->
@@ -190,12 +190,12 @@ onMounted(fetchCart)
       <!-- Info -->
       <div class="flex-1 p-4 flex flex-col justify-between">
         <div>
-          <h2 class="font-semibold text-gray-100 mb-2 sm:text-xl">{{ item.tile_name }}</h2>
-          <p class="text-gray-400 text-sm mb-1">
+          <h2 class="font-semibold text-gray-600 mb-2 sm:text-xl">{{ item.tile_name }}</h2>
+          <p class="text-gray-900 text-sm mb-1">
             <i class="fa-solid fa-layer-group mr-1"></i>
             {{ item.tile_category }} - {{ item.tile_type }}
           </p>
-          <p class="text-gray-400 text-sm mb-1">
+          <p class="text-gray-900 text-sm mb-1">
             <i class="fa-solid fa-boxes-stacked mr-1"></i> Stock:
             <span :class="item.tile_stock > 0 ? 'text-green-400 font-semibold' : 'text-red-500 font-semibold'">
               {{ item.tile_stock > 0 ? item.tile_stock : 'Out of Stock' }}
@@ -203,12 +203,12 @@ onMounted(fetchCart)
           </p>
 
           <!-- Quantity & Price -->
-          <div class="flex gap-4 text-gray-300 text-sm mt-2 flex-wrap items-center">
+          <div class="flex gap-4 text-gray-600 text-sm mt-2 flex-wrap items-center">
             <div class="flex items-center gap-2">
-              <label class="text-gray-300">Qty:</label>
+              <label class="text-gray-600">Qty:</label>
               <div class="flex items-center bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
                 <button @click="item.quantity = Math.max(1, item.quantity - 1)"
-                  class="px-3 py-1 hover:bg-gray-600 text-gray-300 text-lg" :disabled="item.quantity <= 1">
+                  class="px-3 py-1 hover:bg-gray-600 text-gray-600 text-lg" :disabled="item.quantity <= 1">
                   <i class="fa-solid fa-minus"></i>
                 </button>
                 <input type="number" v-model.number="item.quantity" min="1" :max="item.tile_stock" @input="() => {

@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full flex flex-col items-center justify-center px-6 py-16 bg-gray-900 text-white overflow-hidden">
+  <div class="w-full flex flex-col items-center justify-center px-6 py-16 bg-gray-300 text-white overflow-hidden">
     <!-- About Us Section -->
     <section class="max-w-3xl text-center animate-slide-down">
       <h1 class="text-4xl md:text-5xl font-bold mb-4 text-sky-400 drop-shadow-md">
         About SDTC
       </h1>
-      <p class="text-lg md:text-xl mb-6 text-gray-300 leading-relaxed">
-        <span class="font-semibold text-white">Sorsogon Depot and Tile Center (SDTC)</span> is a
+      <p class="text-lg md:text-xl mb-6 text-gray-900 leading-relaxed">
+        <span class="font-semibold">Sorsogon Depot and Tile Center (SDTC)</span> is a
         web-based platform designed to simplify ordering and streamline inventory management
         for staff, managers, and customers.
       </p>
@@ -16,7 +16,7 @@
     <section class="mt-16 max-w-4xl text-center animate-slide-up">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div
-          class="bg-gray-800/80 border border-gray-700/60 rounded-2xl p-8 shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-700 group relative overflow-hidden"
+          class="bg-gray-400/70 border border-gray-100/60 rounded-2xl p-8 shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-700 group relative overflow-hidden"
         >
           <div
             class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent
@@ -24,15 +24,15 @@
                    transition-all duration-[1200ms] ease-in-out pointer-events-none"
           ></div>
           <i class="fa-solid fa-bullseye text-sky-400 text-3xl mb-4"></i>
-          <h2 class="text-2xl font-semibold mb-3 text-white">Our Mission</h2>
-          <p class="text-gray-300 leading-relaxed">
+          <h2 class="text-2xl font-semibold mb-3 text-gray-900">Our Mission</h2>
+          <p class="text-gray-700 leading-relaxed">
             To simplify the ordering process and improve inventory tracking, saving time and reducing
             errors for both staff and customers.
           </p>
         </div>
 
         <div
-          class="bg-gray-800/80 border border-gray-700/60 rounded-2xl p-8 shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-700 group relative overflow-hidden"
+          class="bg-gray-400/70 border border-gray-100/60 rounded-2xl p-8 shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-700 group relative overflow-hidden"
         >
           <div
             class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent
@@ -40,8 +40,8 @@
                    transition-all duration-[1200ms] ease-in-out pointer-events-none"
           ></div>
           <i class="fa-solid fa-eye text-sky-400 text-3xl mb-4"></i>
-          <h2 class="text-2xl font-semibold mb-3 text-white">Our Vision</h2>
-          <p class="text-gray-300 leading-relaxed">
+          <h2 class="text-2xl font-semibold mb-3 text-gray-900">Our Vision</h2>
+          <p class="text-gray-700 leading-relaxed">
             To provide a reliable, user-friendly, and future-ready platform that enhances
             order processing, stock accuracy, and the customer experience.
           </p>
@@ -54,7 +54,7 @@
       <div
         v-for="(card, i) in cards"
         :key="i"
-        class="relative bg-gray-800/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-700/60
+        class="relative bg-gray-400/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100/60
                transition-all duration-700 hover:shadow-[0_0_35px_rgba(255,255,255,0.35)] hover:scale-105 group
                animate-slide-up"
         :style="{ animationDelay: `${i * 0.25}s` }"
@@ -69,8 +69,8 @@
           <div class="w-12 h-12 mb-4 flex items-center justify-center bg-sky-600/20 rounded-full">
             <i :class="`fa-solid ${card.icon} text-sky-400 text-2xl`"></i>
           </div>
-          <h3 class="text-xl font-semibold mb-2 text-white">{{ card.title }}</h3>
-          <p class="text-gray-300 leading-relaxed">{{ card.text }}</p>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900">{{ card.title }}</h3>
+          <p class="text-gray-700 leading-relaxed">{{ card.text }}</p>
         </div>
       </div>
     </section>

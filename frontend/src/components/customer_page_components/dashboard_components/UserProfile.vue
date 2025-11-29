@@ -167,7 +167,7 @@ const deleteAddress = async () => {
   <div class="flex flex-col md:flex-row gap-8 sm:p-6 text-white min-h-screen">
     <!-- Left Section -->
     <div
-      class="md:w-1/3 flex flex-col items-center bg-gray-900/80 p-6 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.4)] border border-gray-700 backdrop-blur-md">
+      class="md:w-1/3 flex flex-col items-center bg-gray-300/80 p-6 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.4)] border border-gray-200 backdrop-blur-md">
       <!-- Profile Image -->
       <div class="relative group">
         <img :src="profileImage" alt="Profile"
@@ -175,12 +175,12 @@ const deleteAddress = async () => {
           @click="triggerFilePicker" />
         <div @click="triggerFilePicker"
           class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-          <i class="fa-solid fa-camera text-white text-2xl"></i>
+          <i class="fa-solid fa-camera text-gray-900 text-2xl"></i>
         </div>
         <input type="file" accept="image/*" class="hidden" ref="fileInput" @change="handleImageUpload" />
       </div>
 
-      <p class="mt-4 text-lg font-semibold text-gray-200 text-center break-words">
+      <p class="mt-4 text-lg font-semibold text-gray-900 text-center break-words">
         <i class="fa-solid fa-envelope mr-2 text-sky-400"></i>{{ email }}
       </p>
 
@@ -194,7 +194,7 @@ const deleteAddress = async () => {
       <!-- Address Form -->
       <transition name="fade">
         <form v-if="showForm" @submit.prevent="addAddress"
-          class="mt-6 w-full max-w-lg sm:max-w-2xl bg-gray-800/70 p-4 sm:p-6 rounded-2xl flex flex-col gap-4 border border-gray-700 shadow-inner mx-auto">
+          class="mt-6 w-full max-w-lg sm:max-w-2xl bg-gray-300/70 p-4 sm:p-6 rounded-2xl flex flex-col gap-4 border border-gray-200 shadow-inner mx-auto">
           <div class="space-y-3">
             <div v-for="(icon, field) in {
               house_number: 'fa-house',
@@ -205,14 +205,14 @@ const deleteAddress = async () => {
             }" :key="field" class="flex flex-col sm:flex-row sm:items-center sm:gap-3 gap-1">
               <div class="flex items-center gap-2 sm:w-40">
                 <i :class="`fa-solid ${icon} text-sky-400 text-sm sm:text-base`"></i>
-                <label class="text-gray-300 capitalize text-sm sm:text-base" :for="field">
+                <label class="text-gray-800 capitalize text-sm sm:text-base" :for="field">
                   {{ field.replace('_', ' ') }}
                 </label>
               </div>
 
               <input :id="field" v-model="newAddress[field]"
                 :placeholder="field.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())" type="text"
-                class="p-2 sm:p-3 rounded-lg bg-gray-900 text-white border border-gray-700 outline-none focus:ring-2 focus:ring-sky-500 w-full placeholder-gray-500 text-sm sm:text-base" />
+                class="p-2 sm:p-3 rounded-lg bg-gray-900 text-gray-200 border border-gray-700 outline-none focus:ring-2 focus:ring-sky-500 w-full placeholder-gray-500 text-sm sm:text-base" />
             </div>
           </div>
 
@@ -227,12 +227,12 @@ const deleteAddress = async () => {
 
     <!-- Right Section -->
     <div
-      class="flex-1 bg-gray-900/80 p-6 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.4)] border border-gray-700 backdrop-blur-md overflow-y-auto">
-      <h2 class="text-2xl font-bold mb-5 pb-3 border-b border-gray-700 flex items-center gap-2 text-sky-400">
+      class="flex-1 bg-gray-300/80 p-6 rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.4)] border border-gray-200 backdrop-blur-md overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-5 pb-3 border-b border-gray-400 flex items-center gap-2 text-sky-400">
         <i class="fa-solid fa-location-dot"></i> Delivery Addresses
       </h2>
 
-      <div v-if="addresses.length === 0" class="text-gray-500 flex items-center gap-2">
+      <div v-if="addresses.length === 0" class="text-gray-700 flex items-center gap-2">
         <i class="fa-solid fa-circle-exclamation text-yellow-400"></i> No addresses added yet.
       </div>
 
@@ -241,8 +241,8 @@ const deleteAddress = async () => {
           class="p-5 rounded-2xl cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           :class="address.is_active
             ? 'bg-gradient-to-r from-green-700/80 to-green-600/60 border border-green-500/50'
-            : 'bg-gray-800 border border-gray-700 hover:border-sky-600/50'" @click="activateAddress(address.id)">
-          <div class="space-y-2 text-gray-200">
+            : 'bg-gray-300/70 border border-gray-400 hover:border-sky-600/50'" @click="activateAddress(address.id)">
+          <div class="space-y-2 text-gray-900">
             <div class="flex items-start gap-2">
               <i class="fa-solid fa-house text-sky-400 w-5 text-center"></i>
               <span class="font-semibold w-28 sm:w-32">House No:</span>

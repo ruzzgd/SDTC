@@ -82,11 +82,11 @@ onMounted(fetchOrderLogs);
 </script>
 
 <template>
-  <div class="p-8 bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen text-white">
+  <div class="p-8 bg-gray-300 min-h-screen text-gray-900">
     <!-- Header -->
     <div class="flex justify-between items-center mb-8">
       <h2
-        class="text-3xl font-bold bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent"
+        class="text-3xl font-bold bg-gradient-to-r from-blue-500 to-sky-400 bg-clip-text text-transparent"
       >
         📜 Order Logs
       </h2>
@@ -97,20 +97,22 @@ onMounted(fetchOrderLogs);
           v-model="searchQuery"
           type="text"
           placeholder="Search by Order ID..."
-          class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-500"
+          class="w-full px-4 py-2 rounded-lg bg-white border border-gray-300 
+                 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 
+                 placeholder-gray-400"
         />
         <i
-          class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+          class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
         ></i>
       </div>
     </div>
 
     <!-- Table Container -->
     <div
-      class="overflow-x-auto rounded-lg shadow-lg bg-gray-900/70 backdrop-blur-md border border-gray-700"
+      class="overflow-x-auto rounded-lg shadow-md bg-white border border-gray-300"
     >
-      <table class="w-full text-sm text-gray-200">
-        <thead class="bg-gray-800/80 text-cyan-400 uppercase text-xs">
+      <table class="w-full text-sm text-gray-900">
+        <thead class="bg-gray-200 text-blue-600 uppercase text-xs">
           <tr>
             <th class="px-4 py-3 text-center">Order ID</th>
             <th class="px-4 py-3 text-center">Customer</th>
@@ -127,47 +129,54 @@ onMounted(fetchOrderLogs);
           <tr
             v-for="order in filteredOrders"
             :key="order.orderId"
-            class="hover:bg-gray-800/60 transition-colors"
+            class="hover:bg-gray-100 transition-colors"
           >
-            <td class="border-t border-gray-700 py-3 text-center font-medium">
+            <td class="border-t border-gray-300 py-3 text-center font-medium">
               {{ order.orderId }}
             </td>
-            <td class="border-t border-gray-700 py-3 text-center">
+
+            <td class="border-t border-gray-300 py-3 text-center">
               {{ order.customer }}
             </td>
-            <td class="border-t border-gray-700 py-3">
+
+            <td class="border-t border-gray-300 py-3">
               <ul>
                 <li v-for="(item, i) in order.items" :key="i">
                   {{ item.name }}
                 </li>
               </ul>
             </td>
-            <td class="border-t border-gray-700 py-3 text-center">
+
+            <td class="border-t border-gray-300 py-3 text-center">
               <ul>
                 <li v-for="(item, i) in order.items" :key="i">
                   ₱{{ item.price.toFixed(2) }}
                 </li>
               </ul>
             </td>
-            <td class="border-t border-gray-700 py-3 text-center">
+
+            <td class="border-t border-gray-300 py-3 text-center">
               <ul>
                 <li v-for="(item, i) in order.items" :key="i">
                   {{ item.quantity }}
                 </li>
               </ul>
             </td>
-            <td class="border-t border-gray-700 py-3 text-center">
+
+            <td class="border-t border-gray-300 py-3 text-center">
               <ul>
                 <li v-for="(item, i) in order.items" :key="i">
                   ₱{{ itemTotal(item).toFixed(2) }}
                 </li>
               </ul>
             </td>
-            <td class="border-t border-gray-700 py-3 text-center">
+
+            <td class="border-t border-gray-300 py-3 text-center">
               {{ order.dateOrdered }}
             </td>
+
             <td
-              class="border-t border-gray-700 py-3 text-center font-semibold"
+              class="border-t border-gray-300 py-3 text-center font-semibold"
               :class="statusColor(order.status)"
             >
               {{ order.status }}
@@ -175,7 +184,7 @@ onMounted(fetchOrderLogs);
           </tr>
 
           <tr v-if="filteredOrders.length === 0">
-            <td colspan="8" class="text-center py-6 text-gray-400 italic">
+            <td colspan="8" class="text-center py-6 text-gray-500 italic">
               No order logs found.
             </td>
           </tr>
@@ -184,3 +193,4 @@ onMounted(fetchOrderLogs);
     </div>
   </div>
 </template>
+

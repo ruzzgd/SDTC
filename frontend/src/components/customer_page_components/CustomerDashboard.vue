@@ -54,12 +54,12 @@ const fetchUser = async () => {
 </script>
 
 <template>
-  <div class="h-screen w-screen flex flex-col bg-gray-900 text-gray-200">
+  <div class="h-screen w-screen flex flex-col text-gray-900">
     <OrderModal v-if="order.showModal" />
 
     <!-- Sidebar -->
     <aside
-      class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform transition-transform duration-300 z-50"
+      class="fixed top-0 left-0 h-full w-64 bg-gray-100 text-gray-900 transform transition-transform duration-300 z-50"
       :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
       <!-- Sidebar Header -->
       <header class="h-[70px] flex items-center justify-between px-4 border-b border-gray-700">
@@ -98,10 +98,10 @@ const fetchUser = async () => {
 
     <!-- Navbar -->
     <nav
-      class="w-full h-[80px] flex items-center justify-between px-6 bg-gray-900 border-b border-gray-700 shadow-[0_2px_5px_rgba(135,206,235,0.3)] z-30">
+      class="w-full h-[80px] flex items-center justify-between px-6 bg-gray-100 border-b border-gray-300 shadow-[0_2px_5px_rgba(135,206,235,0.3)] z-30">
       <!-- Left Section -->
       <div class="flex items-center gap-4">
-        <i class="fa-solid fa-bars text-2xl text-gray-100 cursor-pointer hover:text-sky-400 transition"
+        <i class="fa-solid fa-bars text-2xl text-gray-900 cursor-pointer hover:text-sky-400 transition"
           @click="sidebarOpen = true"></i>
         <img src="@/assets/img/sdtc-logo.jpg" @click="$router.push('/dashboard/home')"
           class="h-[45px] rounded-2xl cursor-pointer hover:opacity-80 transition" alt="logo" />
@@ -111,10 +111,10 @@ const fetchUser = async () => {
       <div class="relative profile-area flex items-center gap-3">
         <div class="text-right hidden sm:block">
           <p class="font-semibold text-sm text-sky-400">{{ user.name || 'User' }}</p>
-          <p class="text-xs text-gray-400 truncate w-40">{{ user.email || 'No email' }}</p>
+          <p class="text-xs text-gray-600 truncate w-40">{{ user.email || 'No email' }}</p>
         </div>
 
-        <i class="fa-solid fa-circle-user text-3xl cursor-pointer text-gray-200 hover:text-sky-400 transition"
+        <i class="fa-solid fa-circle-user text-3xl cursor-pointer text-gray-900 hover:text-sky-400 transition"
           @click="toggleProfileDropdown"></i>
 
         <!-- Dropdown -->
@@ -135,7 +135,7 @@ const fetchUser = async () => {
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-1 overflow-y-auto p-6 bg-gray-800 text-gray-200 custom-scrollbar">
+    <main class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 text-gray-900 custom-scrollbar">
       <router-view />
     </main>
   </div>

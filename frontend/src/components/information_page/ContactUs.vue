@@ -1,37 +1,37 @@
 <template>
-  <div class="w-full flex flex-col items-center justify-center px-6 py-16 bg-gray-900 text-white">
+  <div class="w-full flex flex-col items-center justify-center px-6 py-16 bg-gray-300">
     <!-- Header -->
     <section class="max-w-3xl text-center animate-slide-down">
-      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Contact Us</h1>
-      <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-6">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 text-sky-400">Contact Us</h1>
+      <p class="text-base sm:text-lg md:text-xl text-gray-900 mb-6">
         Have questions or need assistance? Reach out to us — we’ll get back to you as soon as possible.
       </p>
     </section>
 
     <!-- Contact Info -->
     <section class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 w-full max-w-5xl text-center">
-      <div class="relative bg-gray-800/90 p-6 rounded-2xl shadow-lg overflow-hidden
+      <div class="relative bg-gray-400/70 p-6 rounded-2xl shadow-lg overflow-hidden
                   transition-all duration-700 hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] hover:scale-105 group animate-slide-down">
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-sky-400/20 to-transparent
                     -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-        <h3 class="text-xl font-semibold mb-2 text-sky-400">Email</h3>
-        <p class="text-gray-300 break-words">support@sdtc.com</p>
+        <h3 class="text-xl font-semibold mb-2 text-sky-600">Email</h3>
+        <p class="text-gray-900 break-words">support@sdtc.com</p>
       </div>
 
-      <div class="relative bg-gray-800/90 p-6 rounded-2xl shadow-lg overflow-hidden
+      <div class="relative bg-gray-400/70 p-6 rounded-2xl shadow-lg overflow-hidden
                   transition-all duration-700 hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] hover:scale-105 group animate-slide-down delay-200">
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-sky-400/20 to-transparent
                     -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-        <h3 class="text-xl font-semibold mb-2 text-sky-400">Phone</h3>
-        <p class="text-gray-300">+63 912 345 6789</p>
+        <h3 class="text-xl font-semibold mb-2 text-sky-600">Phone</h3>
+        <p class="text-gray-900">+63 912 345 6789</p>
       </div>
 
-      <div class="relative bg-gray-800/90 p-6 rounded-2xl shadow-lg overflow-hidden
+      <div class="relative bg-gray-400/70 p-6 rounded-2xl shadow-lg overflow-hidden
                   transition-all duration-700 hover:shadow-[0_0_30px_rgba(56,189,248,0.4)] hover:scale-105 group animate-slide-down delay-500">
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-sky-400/20 to-transparent
                     -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-        <h3 class="text-xl font-semibold mb-2 text-sky-400">Address</h3>
-        <p class="text-gray-300 leading-relaxed">
+        <h3 class="text-xl font-semibold mb-2 text-sky-600">Address</h3>
+        <p class="text-gray-900 leading-relaxed">
           Sorsogon Depot and Tile Center, <br />
           Bulan, Sorsogon, Philippines
         </p>
@@ -43,14 +43,14 @@
       <form
         ref="form"
         @submit.prevent="sendEmail"
-        class="flex flex-col gap-5 bg-gray-800/90 p-8 rounded-2xl shadow-lg border border-gray-700"
+        class="flex flex-col gap-5 bg-gray-400/70 p-8 rounded-2xl shadow-lg border border-gray-100"
       >
         <input
           v-model="name"
           type="text"
           name="user_name"
           placeholder="Your Name"
-          class="p-3 sm:p-4 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-500"
+          class="p-3 sm:p-4 rounded-lg bg-gray-200 text-gray-900 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-700"
           required
         />
         <input
@@ -58,7 +58,7 @@
           type="email"
           name="user_email"
           placeholder="Your Email"
-          class="p-3 sm:p-4 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-500"
+          class="p-3 sm:p-4 rounded-lg bg-gray-200 text-gray-900 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-700"
           required
         />
         <textarea
@@ -66,7 +66,7 @@
           name="message"
           placeholder="Your Message"
           rows="5"
-          class="p-3 sm:p-4 rounded-lg bg-gray-900 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-500 resize-none"
+          class="p-3 sm:p-4 rounded-lg bg-gray-200 text-gray-900 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-gray-700 resize-none"
           required
         ></textarea>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="p-8 bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen text-white">
+  <div class="p-8 bg-gray-300 min-h-screen text-gray-900">
     <h2
-      class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">
+      class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-500 to-sky-400 bg-clip-text text-transparent">
       <i class="fas fa-box-open mr-2"></i>
       Product Management
     </h2>
@@ -10,67 +10,65 @@
     <div class="flex flex-col md:flex-row md:justify-between items-center gap-4 mb-6">
       <div class="flex flex-row gap-5">
         <button
-          class="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-md hover:scale-[1.03] flex items-center gap-2"
+          class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm hover:scale-[1.03] flex items-center gap-2"
           @click="openAddModal">
           <i class="fas fa-plus"></i>
           Add New Product
         </button>
+
         <button @click="showArchived = !showArchived"
-          class="bg-gray-600 hover:bg-gray-700 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-md hover:scale-[1.03] flex items-center gap-2">
+          class="bg-gray-500 hover:bg-gray-400 text-gray-800 px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm hover:scale-[1.03] flex items-center gap-2">
           <i class="fas fa-archive"></i>
           {{ showArchived ? 'Hide Archived' : 'Show Archived' }}
         </button>
 
-        <!-- 🧾 Stock Record Button -->
         <button @click="openStockRecordModal"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-md hover:scale-[1.03] flex items-center gap-2">
+          class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm hover:scale-[1.03] flex items-center gap-2">
           <i class="fas fa-history"></i>
           Stock Records
         </button>
       </div>
 
-      <!-- Bulk Stock + Select All Icon (aligned right) -->
       <div class="flex items-center gap-3">
-        <!-- Bulk Stock Controls -->
         <div v-if="selectAllMode && selectedProducts.length > 0" class="flex items-center gap-3">
           <input type="number" min="0" v-model.number="bulkStock"
-            class="w-24 px-3 py-2 rounded-lg text-gray-200 font-medium" placeholder="Stock" />
-          <!-- ✅ Add Stock Button -->
+            class="w-24 px-3 py-2 rounded-lg text-gray-800 border border-gray-300 bg-white" placeholder="Stock" />
+
           <button @click="addSelectedStock"
-            class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition-all shadow-md flex items-center gap-2">
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all shadow flex items-center gap-2">
             <i class="fas fa-plus-circle"></i>
             Add Stock
           </button>
-          <!-- 🧩 Update Stock Button -->
+
           <button @click="updateSelectedStock"
-            class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg font-medium transition-all shadow-md flex items-center gap-2">
+            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all shadow flex items-center gap-2">
             <i class="fas fa-sync-alt"></i>
             Update Stock
           </button>
         </div>
 
-        <!-- Stock-In Toggle -->
-        <button class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg flex items-center justify-center gap-2"
+        <button
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center justify-center gap-2"
           @click="toggleSelectAllMode" title="Select All Products">
           <span>Stock-In</span>
-          <i class="fas fa-check-double" :class="selectAllMode ? 'text-blue-500' : 'text-white'"></i>
+          <i class="fas fa-check-double" :class="selectAllMode ? 'text-blue-600' : 'text-gray-600'"></i>
         </button>
       </div>
     </div>
 
     <!-- Product Table -->
-    <div class="overflow-x-auto rounded-lg shadow-lg bg-gray-900/70 backdrop-blur-md border border-gray-700">
-      <table class="w-full text-sm text-gray-200">
-        <thead class="bg-gray-800/80 text-cyan-400 uppercase text-xs">
+    <div class="overflow-x-auto rounded-lg shadow bg-white border border-gray-300">
+      <table class="w-full text-sm text-gray-700">
+        <thead class="bg-gray-200 text-blue-600 uppercase text-xs">
           <tr>
             <th class="px-4 py-3 text-left">
               <input v-if="selectAllMode" type="checkbox" v-model="selectAll" />
             </th>
             <th class="px-4 py-3 text-center">Image</th>
-            <th class="px-4 py-3 text-left">Category</th>
-            <th class="px-4 py-3 text-left">Type</th>
-            <th class="px-4 py-3 text-left">Name</th>
-            <th class="px-4 py-3 text-left">Description</th>
+            <th class="px-4 py-3">Category</th>
+            <th class="px-4 py-3">Type</th>
+            <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Description</th>
             <th class="px-4 py-3 text-center">Price</th>
             <th class="px-4 py-3 text-center">Stock</th>
             <th class="px-4 py-3 text-center">Actions</th>
@@ -79,45 +77,52 @@
 
         <tbody>
           <tr v-for="product in products.filter(p => showArchived ? p.is_archived : !p.is_archived)" :key="product.id"
-            :class="['hover:bg-gray-800/60 transition-colors', product.is_archived ? 'bg-gray-700/50 line-through text-gray-400' : '']">
-
-            <td class="border-t border-gray-700 py-3 px-4">
+            :class="[
+              'hover:bg-gray-50 transition-colors',
+              product.is_archived ? 'bg-gray-200 line-through text-gray-500' : ''
+            ]">
+            <td class="border-t border-gray-200 py-3 px-4">
               <input v-if="selectAllMode" type="checkbox" v-model="selectedProducts" :value="product.id" />
             </td>
-            <td class="border-t border-gray-700 py-3 px-4 text-center">
+
+            <td class="border-t border-gray-200 py-3 px-4 text-center">
               <img v-if="product.tile_image" :src="product.tile_image" alt="Tile"
-                class="w-16 h-16 object-cover rounded-lg border border-gray-700 shadow-md mx-auto" />
-              <span v-else class="text-gray-500 italic">No image</span>
+                class="w-16 h-16 object-cover rounded-lg border border-gray-300 shadow-sm mx-auto" />
+              <span v-else class="text-gray-400 italic">No image</span>
             </td>
-            <td class="border-t border-gray-700 py-3 px-4">{{ product.tile_category }}</td>
-            <td class="border-t border-gray-700 py-3 px-4">{{ product.tile_type }}</td>
-            <td class="border-t border-gray-700 py-3 px-4 font-medium text-white">{{ product.tile_name }}</td>
-            <td class="border-t border-gray-700 py-3 px-4 text-gray-300 truncate max-w-[200px]">
+
+            <td class="border-t border-gray-200 py-3 px-4">{{ product.tile_category }}</td>
+            <td class="border-t border-gray-200 py-3 px-4">{{ product.tile_type }}</td>
+            <td class="border-t border-gray-200 py-3 px-4 font-medium text-gray-900">{{ product.tile_name }}</td>
+
+            <td class="border-t border-gray-200 py-3 px-4 text-gray-600 truncate max-w-[200px]">
               {{ product.tile_description }}
             </td>
-            <td class="border-t border-gray-700 py-3 px-4 text-center font-semibold text-green-400">
+
+            <td class="border-t border-gray-200 py-3 px-4 text-center font-semibold text-green-600">
               ₱{{ product.tile_price?.toFixed(2) }}
             </td>
-            <td class="border-t border-gray-700 py-3 px-4 text-center" :class="stockColor(product.tile_stock)">
+
+            <td class="border-t border-gray-200 py-3 px-4 text-center" :class="stockColor(product.tile_stock)">
               {{ product.tile_stock }}
             </td>
 
-            <td class="border-t border-gray-700 py-3 text-center">
+            <td class="border-t border-gray-200 py-3 text-center">
               <div class="flex flex-col items-center gap-2">
                 <button @click="openEditModal(product)" :disabled="product.is_archived"
-                  class="bg-blue-600 hover:bg-blue-700 w-32 py-1.5 rounded-lg font-medium transition-all shadow-md hover:scale-[1.03] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                  class="bg-blue-500 hover:bg-blue-600 text-white w-32 py-1.5 rounded-lg font-medium transition-all shadow flex items-center justify-center gap-2 disabled:opacity-40">
                   <i class="fas fa-edit"></i> Edit
                 </button>
 
                 <button @click="toggleArchive(product)"
-                  :class="product.is_archived ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-gray-600 hover:bg-gray-700'"
-                  class="w-32 py-1.5 rounded-lg font-medium transition-all shadow-md hover:scale-[1.03] flex items-center justify-center gap-2">
+                  :class="product.is_archived ? 'bg-yellow-500 hover:bg-yellow-600' : 'bg-gray-300 hover:bg-gray-400'"
+                  class="w-32 py-1.5 rounded-lg font-medium transition-all shadow flex items-center justify-center gap-2 text-gray-800">
                   <i class="fas" :class="product.is_archived ? 'fa-box-open' : 'fa-archive'"></i>
                   {{ product.is_archived ? 'Unarchive' : 'Archive' }}
                 </button>
 
                 <button @click="confirmDelete(product)" :disabled="product.is_archived"
-                  class="bg-red-600 hover:bg-red-700 w-32 py-1.5 rounded-lg font-medium transition-all shadow-md hover:scale-[1.03] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                  class="bg-red-500 hover:bg-red-600 text-white w-32 py-1.5 rounded-lg font-medium transition-all shadow flex items-center justify-center gap-2 disabled:opacity-40">
                   <i class="fas fa-trash"></i> Delete
                 </button>
               </div>
@@ -125,7 +130,7 @@
           </tr>
 
           <tr v-if="products.length === 0">
-            <td colspan="10" class="text-center py-6 text-gray-400 italic">
+            <td colspan="10" class="text-center py-6 text-gray-500 italic">
               No products found.
             </td>
           </tr>
@@ -133,18 +138,18 @@
       </table>
     </div>
 
-    <!-- 📊 Stock Records Modal -->
+    <!-- Stock Records Modal -->
     <transition name="fade">
-      <div v-if="showStockModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+      <div v-if="showStockModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
         <div
-          class="bg-gray-900/95 border border-gray-700 rounded-xl p-6 w-[800px] text-gray-100 shadow-2xl max-h-[80vh] overflow-y-auto">
-          <h3 class="text-2xl font-bold mb-5 text-indigo-300 border-b border-gray-700 pb-2 flex items-center gap-2">
+          class="bg-white border border-gray-300 rounded-xl p-6 w-[800px] text-gray-900 shadow-xl max-h-[80vh] overflow-y-auto">
+          <h3 class="text-2xl font-bold mb-5 text-indigo-600 border-b border-gray-200 pb-2 flex items-center gap-2">
             <i class="fas fa-history"></i>
             Stock Records
           </h3>
 
-          <table class="w-full text-sm text-gray-200 border border-gray-700 rounded-lg overflow-hidden">
-            <thead class="bg-gray-800/90 text-indigo-400 uppercase text-xs">
+          <table class="w-full text-sm text-gray-700 border border-gray-300 rounded-lg">
+            <thead class="bg-gray-100 text-indigo-600 uppercase text-xs">
               <tr>
                 <th class="px-3 py-2 text-left">Product ID</th>
                 <th class="px-3 py-2 text-left">Change Type</th>
@@ -155,7 +160,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="record in stockRecords" :key="record.id" class="border-t border-gray-700 hover:bg-gray-800/60">
+              <tr v-for="record in stockRecords" :key="record.id" class="border-t border-gray-200 hover:bg-gray-50">
                 <td class="px-3 py-2">{{ record.product_id }}</td>
                 <td class="px-3 py-2 capitalize">{{ record.change_type }}</td>
                 <td class="px-3 py-2 text-center">{{ record.quantity_changed }}</td>
@@ -165,7 +170,7 @@
               </tr>
 
               <tr v-if="stockRecords.length === 0">
-                <td colspan="7" class="text-center py-5 text-gray-400 italic">
+                <td colspan="7" class="text-center py-5 text-gray-500 italic">
                   No stock records found.
                 </td>
               </tr>
@@ -174,34 +179,36 @@
 
           <div class="mt-5 flex justify-end">
             <button @click="closeStockRecordModal"
-              class="bg-gray-600 hover:bg-gray-700 px-5 py-2 rounded-lg text-white font-medium transition-all">
+              class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-5 py-2 rounded-lg font-medium transition-all">
               Close
             </button>
           </div>
         </div>
       </div>
     </transition>
+
+    <!-- Add/Edit Product Modal -->
     <transition name="fade">
-      <div v-if="showModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-        <div class="bg-gray-900/90 border border-gray-700 rounded-xl p-6 w-[700px] text-gray-100 shadow-2xl">
-          <h3 class="text-2xl font-bold mb-5 text-cyan-300 border-b border-gray-700 pb-2 flex items-center gap-2">
-            <i :class="isEditing ? 'fas fa-edit text-blue-400' : 'fas fa-plus text-green-400'"></i>
+      <div v-if="showModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div class="bg-white border border-gray-300 rounded-xl p-6 w-[700px] text-gray-900 shadow-xl">
+          <h3 class="text-2xl font-bold mb-5 text-blue-600 border-b border-gray-200 pb-2 flex items-center gap-2">
+            <i :class="isEditing ? 'fas fa-edit text-blue-500' : 'fas fa-plus text-green-500'"></i>
             {{ isEditing ? 'Edit Product' : 'Add Product' }}
           </h3>
 
           <div class="grid grid-cols-2 gap-5">
             <div>
-              <label class="block text-gray-300 font-medium">Category</label>
+              <label class="block text-gray-700 font-medium">Category</label>
               <select v-model="form.tile_category"
-                class="w-full border border-gray-700 bg-gray-800 rounded-lg px-3 py-2 mt-1 text-gray-100 focus:ring-2 focus:ring-sky-500">
+                class="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 mt-1 text-gray-900 focus:ring-2 focus:ring-blue-400">
                 <option value="" disabled>Select Category</option>
                 <option value="Tiles">Tiles</option>
                 <option value="Others">Others</option>
               </select>
 
-              <label class="block text-gray-300 font-medium mt-3">Type</label>
+              <label class="block text-gray-700 font-medium mt-3">Type</label>
               <select v-if="form.tile_category === 'Tiles'" v-model="form.tile_type"
-                class="w-full border border-gray-700 bg-gray-800 rounded-lg px-3 py-2 mt-1 text-gray-100 focus:ring-2 focus:ring-sky-500">
+                class="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 mt-1 text-gray-900 focus:ring-2 focus:ring-blue-400">
                 <option value="" disabled>Select Type</option>
                 <option value="Floor">Floor Tile</option>
                 <option value="Wall">Wall Tile</option>
@@ -209,40 +216,43 @@
                 <option value="Paving">Paving Tile</option>
                 <option value="Pool">Pool Tile</option>
               </select>
+
               <input v-else type="text" v-model="form.tile_type" placeholder="Enter product type"
-                class="w-full border border-gray-700 bg-gray-800 rounded-lg px-3 py-2 mt-1 text-gray-100 focus:ring-2 focus:ring-sky-500" />
+                class="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 mt-1 text-gray-900 focus:ring-2 focus:ring-blue-400" />
 
-              <label class="block text-gray-300 font-medium mt-3">Name</label>
+              <label class="block text-gray-700 font-medium mt-3">Name</label>
               <input v-model="form.tile_name" type="text"
-                class="w-full border border-gray-700 bg-gray-800 rounded-lg px-3 py-2 mt-1 text-gray-100 focus:ring-2 focus:ring-sky-500" />
+                class="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 mt-1 text-gray-900 focus:ring-2 focus:ring-blue-400" />
 
-              <label class="block text-gray-300 font-medium mt-3">Description</label>
+              <label class="block text-gray-700 font-medium mt-3">Description</label>
               <textarea v-model="form.tile_description" rows="4"
-                class="w-full border border-gray-700 bg-gray-800 rounded-lg px-3 py-2 mt-1 resize-none text-gray-100 focus:ring-2 focus:ring-sky-500"></textarea>
+                class="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 mt-1 resize-none text-gray-900 focus:ring-2 focus:ring-blue-400"></textarea>
             </div>
 
             <div>
-              <label class="block text-gray-300 font-medium">Price (₱)</label>
+              <label class="block text-gray-700 font-medium">Price (₱)</label>
               <input v-model.number="form.tile_price" type="number" min="0" step="0.01"
-                class="w-full border border-gray-700 bg-gray-800 rounded-lg px-3 py-2 mt-1 text-gray-100 focus:ring-2 focus:ring-sky-500" />
+                class="w-full border border-gray-300 bg-white rounded-lg px-3 py-2 mt-1 text-gray-900 focus:ring-2 focus:ring-blue-400" />
 
-              <label class="block text-gray-300 font-medium mt-3">Tile Image</label>
+              <label class="block text-gray-700 font-medium mt-3">Tile Image</label>
               <input ref="fileInput" type="file" accept="image/*" @change="handleFileUpload"
-                class="w-full text-gray-200 file:bg-gray-700 file:text-white file:px-3 file:py-2 file:rounded-lg file:border-0 file:mr-3 mt-1" />
+                class="w-full text-gray-700 file:bg-gray-300 file:text-gray-900 file:px-3 file:py-2 file:rounded-lg file:border-0 file:mr-3 mt-1" />
+
               <div v-if="form.tile_image" class="mt-3">
                 <img :src="form.tile_image"
-                  class="w-28 h-28 rounded-lg object-cover border border-gray-700 shadow-md" />
+                  class="w-28 h-28 rounded-lg object-cover border border-gray-300 shadow-md" />
               </div>
             </div>
           </div>
 
           <div class="mt-6 flex justify-end space-x-3">
             <button @click="closeModal"
-              class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg font-medium text-white transition-all shadow-md">
+              class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg font-medium transition-all shadow">
               Cancel
             </button>
+
             <button @click="saveProduct"
-              class="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg font-medium text-white transition-all shadow-md flex items-center gap-2">
+              class="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg font-medium transition-all shadow flex items-center gap-2">
               <i :class="isEditing ? 'fas fa-save' : 'fas fa-check'"></i>
               {{ isEditing ? 'Update Product' : 'Save Product' }}
             </button>
@@ -253,31 +263,35 @@
 
     <!-- Confirmation Modal -->
     <transition name="fade">
-      <div v-if="showConfirmModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-        <div class="bg-gray-900/90 border border-gray-700 rounded-xl p-6 w-[400px] text-center shadow-2xl">
-          <h3 class="text-lg font-semibold mb-4 text-cyan-300">
-            <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>
+      <div v-if="showConfirmModal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div class="bg-white border border-gray-300 rounded-xl p-6 w-[400px] text-center shadow-xl">
+          <h3 class="text-lg font-semibold mb-4 text-blue-600">
+            <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
             Confirm Delete
           </h3>
-          <p class="text-gray-300 mb-6">
+
+          <p class="text-gray-700 mb-6">
             Are you sure you want to delete
-            <span class="font-semibold text-sky-400">{{ selectedProduct?.tile_name }}</span>?
+            <span class="font-semibold text-blue-600">{{ selectedProduct?.tile_name }}</span>?
           </p>
+
           <div class="flex justify-center gap-4">
             <button @click="showConfirmModal = false"
-              class="bg-gray-600 hover:bg-gray-700 px-5 py-1.5 rounded-lg font-medium shadow">
+              class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-5 py-1.5 rounded-lg font-medium shadow">
               Cancel
             </button>
             <button @click="deleteProduct"
-              class="bg-red-600 hover:bg-red-700 px-5 py-1.5 rounded-lg font-medium shadow">
+              class="bg-red-500 hover:bg-red-600 text-white px-5 py-1.5 rounded-lg font-medium shadow">
               Delete
             </button>
           </div>
         </div>
       </div>
     </transition>
+
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";

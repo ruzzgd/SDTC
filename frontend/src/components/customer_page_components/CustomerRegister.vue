@@ -55,7 +55,7 @@ const handleCreateAccount = async () => {
 
 <template>
   <div
-    class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-6 relative overflow-hidden"
+    class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 text-white px-6 relative overflow-hidden"
   >
     <!-- Background glow -->
     <div class="absolute inset-0 flex justify-center items-center opacity-10 blur-3xl">
@@ -64,25 +64,26 @@ const handleCreateAccount = async () => {
 
     <!-- Register Card -->
     <div
-      class="relative bg-gray-800/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md flex flex-col gap-6 border border-gray-700/50 animate-fade-in"
+      class="relative bg-gray-300/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md flex flex-col gap-6 border border-gray-700/50 animate-fade-in"
     >
       <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-sky-400 mb-2 tracking-wide">
         Create Account
       </h1>
-      <p class="text-center text-gray-400 text-sm mb-4">
+
+      <p class="text-center text-gray-700 text-sm mb-4">
         Start managing your orders and inventory with SDTC.
       </p>
 
       <!-- Email -->
       <div class="flex flex-col gap-2">
-        <label for="email" class="font-medium text-sm text-gray-300">Email</label>
+        <label for="email" class="font-medium text-sm text-gray-900">Email</label>
         <input
           type="email"
           id="email"
           v-model="email_input"
           :placeholder="email_error ? 'Enter a valid email address' : 'Enter your email'"
           :class="[
-            'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none transition-all duration-200 placeholder-gray-500',
+            'border rounded-lg px-4 py-3 bg-gray-200/70 text-gray-900 focus:outline-none transition-all duration-200 placeholder-gray-700',
             email_error
               ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
               : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
@@ -92,14 +93,14 @@ const handleCreateAccount = async () => {
 
       <!-- Password -->
       <div class="flex flex-col gap-2">
-        <label for="password" class="font-medium text-sm text-gray-300">Password</label>
+        <label for="password" class="font-medium text-sm text-gray-900">Password</label>
         <input
           type="password"
           id="password"
           v-model="password_input"
           :placeholder="password_error ? 'Password is required' : 'Enter your password'"
           :class="[
-            'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none transition-all duration-200 placeholder-gray-500',
+            'border rounded-lg px-4 py-3 bg-gray-200/70 text-gray-900 focus:outline-none transition-all duration-200 placeholder-gray-700',
             password_error
               ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
               : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
@@ -117,7 +118,7 @@ const handleCreateAccount = async () => {
         </p>
       </transition>
 
-      <!-- Button -->
+      <!-- Register Button -->
       <button
         @click="handleCreateAccount"
         class="bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-semibold py-3 rounded-lg shadow-md shadow-sky-900/40 transition-all duration-200 transform hover:scale-105 active:scale-95"
@@ -125,7 +126,8 @@ const handleCreateAccount = async () => {
         Create Account
       </button>
 
-      <p class="text-sm text-gray-400 text-center">
+      <!-- Already Have Account -->
+      <p class="text-sm text-gray-700 text-center">
         Already have an account?
         <button
           @click="$router.replace('/login')"

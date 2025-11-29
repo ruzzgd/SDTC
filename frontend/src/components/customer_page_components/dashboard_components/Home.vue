@@ -95,7 +95,7 @@ onMounted(fetchProducts);
         class="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent drop-shadow-lg animate-pulse">
         Welcome to SDTC Tiles 🏡
       </h1>
-      <p class="text-gray-300 mt-4 text-lg max-w-2xl mx-auto leading-relaxed">
+      <p class="text-gray-900 mt-4 text-lg max-w-2xl mx-auto leading-relaxed">
         Discover stunning tiles to elevate your space — from sleek modern styles
         to timeless classics. Explore, customize, and order effortlessly.
       </p>
@@ -128,8 +128,8 @@ onMounted(fetchProducts);
         <button
           @click="selectedCategory = 'Others'; selectedType = ''"
           :class="selectedCategory === 'Others'
-            ? 'bg-green-600 text-white shadow-lg scale-105'
-            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+            ? 'bg-green-600 text-gray-900 shadow-lg scale-105'
+            : 'bg-gray-300 text-gray-700 hover:bg-gray-400'"
           class="px-5 py-2 rounded-xl font-semibold transition-all transform hover:scale-105">
           Others
         </button>
@@ -142,8 +142,8 @@ onMounted(fetchProducts);
           :key="type"
           @click="selectedType = selectedType === type ? '' : type"
           :class="selectedType === type
-            ? 'bg-blue-500 text-white shadow-lg scale-105'
-            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'"
+            ? 'bg-blue-500 text-gray-900 shadow-lg scale-105'
+            : 'bg-gray-300 text-gray-700 hover:bg-gray-400'"
           class="px-4 py-2 rounded-xl font-semibold transition-all transform hover:scale-105">
           {{ type }}
         </button>
@@ -156,7 +156,7 @@ onMounted(fetchProducts);
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="relative group bg-gray-900/70 border border-gray-800 backdrop-blur-md p-5 rounded-2xl shadow-lg hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] hover:-translate-y-2 transition-all duration-300 flex flex-col overflow-hidden">
+        class="relative group bg-gray-300/70 border border-gray-200 backdrop-blur-md p-5 rounded-2xl shadow-lg hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] hover:-translate-y-2 transition-all duration-300 flex flex-col overflow-hidden">
         
         <!-- Tile Image -->
         <div class="relative overflow-hidden rounded-xl mb-4">
@@ -179,10 +179,10 @@ onMounted(fetchProducts);
         <h3 class="font-semibold text-lg text-sky-400 group-hover:text-sky-300 transition-colors">
           {{ item.tile_name }}
         </h3>
-        <p class="text-sm text-gray-400 mb-2">
+        <p class="text-sm text-gray-600 mb-2">
           {{ item.tile_category }} • {{ item.tile_type }}
         </p>
-        <p class="text-gray-300 text-sm line-clamp-2 mb-3">
+        <p class="text-gray-900 text-sm line-clamp-2 mb-3">
           {{ item.tile_description || "No description available." }}
         </p>
 

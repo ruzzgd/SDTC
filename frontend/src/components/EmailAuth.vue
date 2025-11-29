@@ -112,27 +112,29 @@ const handleResend = async () => {
 
 <template>
   <div
-    class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-6 relative overflow-hidden"
+    class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 text-white px-6 relative overflow-hidden"
   >
+    <!-- Background glow -->
     <div class="absolute inset-0 flex justify-center items-center opacity-10 blur-3xl">
       <div class="w-[600px] h-[600px] bg-sky-500/20 rounded-full animate-pulse"></div>
     </div>
 
+    <!-- Verification Card -->
     <div
-      class="relative bg-gray-800/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md flex flex-col gap-6 border border-gray-700/50 animate-fade-in"
+      class="relative bg-gray-300/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md flex flex-col gap-6 border border-gray-700/50 animate-fade-in"
     >
       <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-sky-400 mb-2 tracking-wide">
         Email Verification
       </h1>
 
-      <p class="text-gray-400 text-center text-sm mb-2 leading-relaxed">
-        We've sent a verification code to your registered email. <br />
+      <p class="text-gray-700 text-center text-sm mb-4 leading-relaxed">
+        We've sent a verification code to your registered email.<br />
         Please enter it below to complete your registration.
       </p>
 
       <!-- Verification Code -->
       <div class="flex flex-col gap-2">
-        <label for="code" class="font-medium text-sm text-gray-300">Verification Code</label>
+        <label for="code" class="font-medium text-sm text-gray-900">Verification Code</label>
         <input
           type="text"
           id="code"
@@ -140,7 +142,7 @@ const handleResend = async () => {
           maxlength="6"
           :placeholder="code_error ? 'Code cannot be empty' : 'Enter your 6-digit code'"
           :class="[
-            'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none text-center font-mono tracking-widest text-lg transition-all duration-200 placeholder-gray-500',
+            'border rounded-lg px-4 py-3 bg-gray-200/70 text-gray-900 focus:outline-none text-center font-mono tracking-widest text-lg transition-all duration-200 placeholder-gray-700',
             code_error
               ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
               : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
@@ -167,7 +169,7 @@ const handleResend = async () => {
       </button>
 
       <!-- Resend -->
-      <p class="text-sm text-gray-400 text-center">
+      <p class="text-sm text-gray-700 text-center">
         Didn’t receive the code?
         <button
           @click="handleResend"
@@ -180,6 +182,7 @@ const handleResend = async () => {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 @keyframes fadeIn {

@@ -180,8 +180,7 @@ const changePassword = async () => {
 
 <template>
   <div
-    class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white px-6 relative overflow-hidden"
-  >
+    class="h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 text-white px-6 relative overflow-hidden">
     <!-- Background glow -->
     <div class="absolute inset-0 flex justify-center items-center opacity-10 blur-3xl">
       <div class="w-[600px] h-[600px] bg-sky-500/20 rounded-full animate-pulse"></div>
@@ -189,81 +188,60 @@ const changePassword = async () => {
 
     <!-- Login Card -->
     <div
-      class="relative bg-gray-800/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md flex flex-col gap-6 border border-gray-700/50 animate-fade-in"
-    >
+      class="relative bg-gray-300/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 sm:p-10 w-full max-w-md flex flex-col gap-6 border border-gray-700/50 animate-fade-in">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-sky-400 mb-2 tracking-wide">
         Welcome Back
       </h1>
-      <p class="text-center text-gray-400 text-sm mb-4">Log in to continue to your dashboard</p>
+      <p class="text-center text-gray-700 text-sm mb-4">Log in to continue to your dashboard</p>
 
       <!-- Email -->
       <div class="flex flex-col gap-2">
-        <label for="email" class="font-medium text-sm text-gray-300">Email</label>
-        <input
-          type="email"
-          id="email"
-          v-model="email_input"
-          :placeholder="email_error ? 'Email cannot be empty' : 'Enter your email'"
-          :class="[
-            'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none transition-all duration-200 placeholder-gray-500',
+        <label for="email" class="font-medium text-sm text-gray-900">Email</label>
+        <input type="email" id="email" v-model="email_input"
+          :placeholder="email_error ? 'Email cannot be empty' : 'Enter your email'" :class="[
+            'border rounded-lg px-4 py-3 bg-gray-200/70 text-gray-900 focus:outline-none transition-all duration-200 placeholder-gray-700',
             email_error
               ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
               : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
-          ]"
-        />
+          ]" />
       </div>
 
       <!-- Password -->
       <div class="flex flex-col gap-2">
-        <label for="password" class="font-medium text-sm text-gray-300">Password</label>
-        <input
-          type="password"
-          id="password"
-          v-model="password_input"
-          :placeholder="password_error ? 'Password cannot be empty' : 'Enter your password'"
-          :class="[
-            'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none transition-all duration-200 placeholder-gray-500',
+        <label for="password" class="font-medium text-sm text-gray-900">Password</label>
+        <input type="password" id="password" v-model="password_input"
+          :placeholder="password_error ? 'Password cannot be empty' : 'Enter your password'" :class="[
+            'border rounded-lg px-4 py-3 bg-gray-200/70 text-gray-900 focus:outline-none transition-all duration-200 placeholder-gray-700',
             password_error
               ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
               : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
-          ]"
-        />
+          ]" />
 
         <!-- Forgot Password -->
-        <button
-          type="button"
-          @click="showForgotModal = true"
-          class="text-sm text-sky-400 hover:text-sky-300 mt-1 text-right transition-colors"
-        >
+        <button type="button" @click="showForgotModal = true"
+          class="text-sm text-sky-400 hover:text-sky-300 mt-1 text-right transition-colors">
           Forgot Password?
         </button>
       </div>
 
       <!-- Error -->
       <transition name="fade">
-        <p
-          v-if="error_message"
-          class="text-red-400 text-sm text-center bg-red-500/10 p-2 rounded-md border border-red-500/40"
-        >
+        <p v-if="error_message"
+          class="text-red-400 text-sm text-center bg-red-500/10 p-2 rounded-md border border-red-500/40">
           {{ error_message }}
         </p>
       </transition>
 
       <!-- Login Button -->
-      <button
-        @click="login"
-        class="bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-semibold py-3 rounded-lg shadow-md shadow-sky-900/40 transition-all duration-200 transform hover:scale-105 active:scale-95"
-      >
+      <button @click="login"
+        class="bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-semibold py-3 rounded-lg shadow-md shadow-sky-900/40 transition-all duration-200 transform hover:scale-105 active:scale-95">
         Login
       </button>
 
       <!-- Register -->
-      <p class="text-sm text-gray-400 text-center">
+      <p class="text-sm text-gray-700 text-center">
         Don’t have an account?
-        <button
-          @click="goToRegister"
-          class="text-sky-400 hover:text-sky-300 font-medium transition-colors"
-        >
+        <button @click="goToRegister" class="text-sky-400 hover:text-sky-300 font-medium transition-colors">
           Create Account
         </button>
       </p>
@@ -271,43 +249,31 @@ const changePassword = async () => {
 
     <!-- Forgot Password Modal -->
     <transition name="fade">
-      <div
-        v-if="showForgotModal"
-        class="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50"
-      >
+      <div v-if="showForgotModal"
+        class="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50">
         <div
-          class="bg-gray-800/80 border border-gray-700/50 rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col gap-5 animate-fade-in"
-        >
-          <h2 class="text-2xl font-bold text-center text-sky-400">Reset Password</h2>
-          <p class="text-gray-400 text-sm text-center">
+          class="bg-white border border-gray-300 rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col gap-5 animate-fade-in">
+          <h2 class="text-2xl font-bold text-center text-sky-600">Reset Password</h2>
+          <p class="text-gray-600 text-sm text-center">
             Enter your email to receive a verification code.
           </p>
 
-          <input
-            type="email"
-            v-model="forgotEmail"
-            placeholder="Enter your email"
-            :class="[
-              'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none placeholder-gray-500',
-              forgotError
-                ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
-                : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
-            ]"
-          />
+          <input type="email" v-model="forgotEmail" placeholder="Enter your email" :class="[
+            'border rounded-lg px-4 py-3 bg-gray-100 text-gray-900 focus:outline-none placeholder-gray-400',
+            forgotError
+              ? 'border-red-500 focus:ring-2 focus:ring-red-300 placeholder-red-400'
+              : 'border-gray-400 focus:ring-2 focus:ring-sky-400'
+          ]" />
 
-          <p v-if="forgotMsg" class="text-center text-sm text-red-400">{{ forgotMsg }}</p>
+          <p v-if="forgotMsg" class="text-center text-sm text-red-500">{{ forgotMsg }}</p>
 
           <div class="flex gap-3 mt-2">
-            <button
-              @click="sendForgotCode"
-              class="flex-1 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition-all duration-200"
-            >
+            <button @click="sendForgotCode"
+              class="flex-1 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition-all duration-200">
               Submit
             </button>
-            <button
-              @click="showForgotModal = false"
-              class="flex-1 bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-2 rounded-lg transition-all duration-200"
-            >
+            <button @click="showForgotModal = false"
+              class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 rounded-lg transition-all duration-200">
               Cancel
             </button>
           </div>
@@ -317,95 +283,72 @@ const changePassword = async () => {
 
     <!-- Verify Code Modal -->
     <transition name="fade">
-      <div
-        v-if="showVerifyModal"
-        class="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50"
-      >
+      <div v-if="showVerifyModal"
+        class="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50">
         <div
-          class="bg-gray-800/80 border border-gray-700/50 rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col gap-5 animate-fade-in"
-        >
-          <h2 class="text-2xl font-bold text-center text-sky-400">Verify Code</h2>
-          <p class="text-gray-400 text-sm text-center">
+          class="bg-white border border-gray-300 rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col gap-5 animate-fade-in">
+          <h2 class="text-2xl font-bold text-center text-sky-600">Verify Code</h2>
+          <p class="text-gray-600 text-sm text-center">
             Enter the code sent to your email.
           </p>
 
-          <input
-            type="text"
-            v-model="verifyCode"
-            placeholder="Enter verification code"
-            :class="[
-              'border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none placeholder-gray-500',
-              verifyError
-                ? 'border-red-500 focus:ring-2 focus:ring-red-400 placeholder-red-400'
-                : 'border-gray-700 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 hover:border-sky-400'
-            ]"
-          />
+          <input type="text" v-model="verifyCode" placeholder="Enter verification code" :class="[
+            'border rounded-lg px-4 py-3 bg-gray-100 text-gray-900 focus:outline-none placeholder-gray-400',
+            verifyError
+              ? 'border-red-500 focus:ring-2 focus:ring-red-300 placeholder-red-400'
+              : 'border-gray-400 focus:ring-2 focus:ring-sky-400'
+          ]" />
 
-          <p v-if="verifyMsg" class="text-center text-sm text-red-400">{{ verifyMsg }}</p>
+          <p v-if="verifyMsg" class="text-center text-sm text-red-500">{{ verifyMsg }}</p>
 
           <div class="flex gap-3 mt-2">
-            <button
-              @click="verifyForgotCode"
-              class="flex-1 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition-all duration-200"
-            >
+            <button @click="verifyForgotCode"
+              class="flex-1 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition-all duration-200">
               Verify
             </button>
-            <button
-              @click="showVerifyModal = false"
-              class="flex-1 bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-2 rounded-lg transition-all duration-200"
-            >
+            <button @click="showVerifyModal = false"
+              class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 rounded-lg transition-all duration-200">
               Cancel
             </button>
           </div>
         </div>
       </div>
     </transition>
+
 
     <!-- Change Password Modal -->
     <transition name="fade">
-      <div
-        v-if="showChangePassModal"
-        class="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50"
-      >
+      <div v-if="showChangePassModal"
+        class="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50">
         <div
-          class="bg-gray-800/80 border border-gray-700/50 rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col gap-5 animate-fade-in"
-        >
-          <h2 class="text-2xl font-bold text-center text-sky-400">Change Password</h2>
-          <p class="text-gray-400 text-sm text-center">Enter your new password below.</p>
+          class="bg-white border border-gray-300 rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col gap-5 animate-fade-in">
+          <h2 class="text-2xl font-bold text-center text-sky-600">Change Password</h2>
+          <p class="text-gray-600 text-sm text-center">
+            Enter your new password below.
+          </p>
 
-          <input
-            type="password"
-            v-model="newPassword"
-            placeholder="New password"
-            class="border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none placeholder-gray-500 border-gray-700 focus:ring-2 focus:ring-sky-500"
-          />
+          <input type="password" v-model="newPassword" placeholder="New password"
+            class="border rounded-lg px-4 py-3 bg-gray-100 text-gray-900 focus:outline-none placeholder-gray-400 border-gray-400 focus:ring-2 focus:ring-sky-400" />
 
-          <input
-            type="password"
-            v-model="confirmPassword"
-            placeholder="Confirm new password"
-            class="border rounded-lg px-4 py-3 bg-gray-900/70 text-white focus:outline-none placeholder-gray-500 border-gray-700 focus:ring-2 focus:ring-sky-500"
-          />
+          <input type="password" v-model="confirmPassword" placeholder="Confirm new password"
+            class="border rounded-lg px-4 py-3 bg-gray-100 text-gray-900 focus:outline-none placeholder-gray-400 border-gray-400 focus:ring-2 focus:ring-sky-400" />
 
-          <p v-if="changeMsg" class="text-center text-sm text-red-400">{{ changeMsg }}</p>
+          <p v-if="changeMsg" class="text-center text-sm text-red-500">{{ changeMsg }}</p>
 
           <div class="flex gap-3 mt-2">
-            <button
-              @click="changePassword"
-              class="flex-1 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition-all duration-200"
-            >
+            <button @click="changePassword"
+              class="flex-1 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 rounded-lg transition-all duration-200">
               Submit
             </button>
-            <button
-              @click="showChangePassModal = false"
-              class="flex-1 bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-2 rounded-lg transition-all duration-200"
-            >
+            <button @click="showChangePassModal = false"
+              class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 rounded-lg transition-all duration-200">
               Cancel
             </button>
           </div>
         </div>
       </div>
     </transition>
+
   </div>
 </template>
 
@@ -415,6 +358,7 @@ const changePassword = async () => {
     opacity: 0;
     transform: translateY(15px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -429,6 +373,7 @@ const changePassword = async () => {
 .fade-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

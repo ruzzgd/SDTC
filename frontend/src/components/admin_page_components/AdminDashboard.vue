@@ -22,16 +22,37 @@ const endDate = ref<string>("");
 const series = ref([{ name: "Sales", data: [] }]);
 const chartOptions = ref<ApexOptions>({
   chart: { id: "sales-performance", toolbar: { show: false } },
-  xaxis: { categories: [], labels: { style: { colors: "#ffffff" } } },
-  yaxis: {
-    title: { text: "PHP (thousands)", style: { color: "#ffffff" } },
-    labels: { style: { colors: "#ffffff" } },
+
+  xaxis: { 
+    categories: [],
+    labels: { 
+      style: { colors: "#333333" }  // dark text for light theme
+    } 
   },
-  colors: ["#3b82f6"],
+
+  yaxis: {
+    title: { 
+      text: "PHP (thousands)", 
+      style: { color: "#333333" } 
+    },
+    labels: { 
+      style: { colors: "#333333" } 
+    },
+  },
+
+  colors: ["#3b82f6"],  // keep your blue
+
   dataLabels: { enabled: false },
-  grid: { borderColor: "#374151" },
-  tooltip: { theme: "dark" },
+
+  grid: { 
+    borderColor: "#e5e7eb" // light gray grid
+  },
+
+  tooltip: { 
+    theme: "light"  // change from dark → light
+  },
 });
+
 
 // --------------------- Fetch Admin ---------------------
 const fetchAdminEmail = async () => {
@@ -212,19 +233,19 @@ onMounted(() => {
 
 
 <template>
-  <div class="flex gap-4 p-4 bg-gray-900 text-gray-200">
+  <div class="flex gap-4 p-4 bg-gray-300 text-gray-200">
     <div class="flex flex-col gap-4 w-1/3">
       <!-- Admin Info -->
-      <div class="p-4 bg-gray-800 rounded shadow flex justify-between items-center">
-        <p class="font-semibold">Logged in as:</p>
+      <div class="p-4 bg-gray-100 rounded shadow flex justify-between items-center">
+        <p class="font-semibold text-gray-900">Logged in as:</p>
         <p class="text-blue-400 font-medium">{{ admin_email || "Loading..." }}</p>
         <button @click="logoutAdmin" class="ml-2 text-red-500 hover:text-red-400 font-medium">Logout</button>
       </div>
 
       <!-- Stats -->
       <div class="grid grid-cols-2 gap-4">
-        <div v-for="(stat, index) in stats" :key="index" class="p-4 bg-gray-800 rounded shadow">
-          <p class="text-sm text-gray-400">{{ stat.title }}</p>
+        <div v-for="(stat, index) in stats" :key="index" class="p-4 bg-gray-100 rounded shadow">
+          <p class="text-sm text-gray-900">{{ stat.title }}</p>
           <p class="text-xl font-bold" :class="stat.title === 'Stock Alerts' ? 'text-red-500' : 'text-green-500'">
             {{ stat.value }}
           </p>
@@ -233,42 +254,42 @@ onMounted(() => {
 
       <!-- Report Generation -->
       <div class="mt-4 space-y-2">
-        <label class="block text-sm text-gray-300">Select Date Range:</label>
+        <label class="block text-sm text-gray-900">Select Date Range:</label>
         <div class="flex gap-4">
           <div class="flex flex-col">
-            <label class="text-sm text-gray-300 mb-1">Start Date:</label>
+            <label class="text-sm text-gray-900 mb-1">Start Date:</label>
             <input type="date" v-model="startDate"
-              class="p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 outline-none" />
+              class="p-2 rounded bg-gray-100 text-gray-900 border border-gray-600 focus:border-blue-500 outline-none" />
           </div>
 
           <div class="flex flex-col">
-            <label class="text-sm text-gray-300 mb-1">End Date:</label>
+            <label class="text-sm text-gray-900 mb-1">End Date:</label>
             <input type="date" v-model="endDate"
-              class="p-2 rounded bg-gray-700 text-white border border-gray-600 focus:border-blue-500 outline-none" />
+              class="p-2 rounded bg-gray-100 text-gray-900 border border-gray-600 focus:border-blue-500 outline-none" />
           </div>
         </div>
 
 
         <button @click="generateReport"
-          class="px-4 py-2 bg-blue-500 hover:bg-blue-400 rounded text-white font-semibold mt-2">
+          class="px-4 py-2 bg-blue-500 hover:bg-blue-400 rounded text-gray-900 font-semibold mt-2">
           Generate Report (PDF)
         </button>
       </div>
 
       <!-- Recent Activity -->
       <div @click="showModal = true"
-        class="flex-1 p-4 bg-gray-800 rounded shadow overflow-auto cursor-pointer hover:bg-gray-700 transition mt-4">
-        <h3 class="font-semibold mb-2">Recent Activity</h3>
-        <ul class="space-y-1 text-gray-300">
+        class="flex-1 p-4 bg-gray-200 rounded shadow overflow-auto cursor-pointer hover:bg-gray-100 transition mt-4">
+        <h3 class="font-semibold mb-2 text-gray-900">Recent Activity</h3>
+        <ul class="space-y-1 text-gray-900">
           <li v-for="(activity, index) in recentActivity.slice(0, 3)" :key="index">• {{ activity }}</li>
         </ul>
       </div>
 
       <!-- Modal -->
       <div v-if="showModal" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-        <div class="bg-gray-800 rounded shadow p-6 max-h-[80%] overflow-auto w-1/2">
-          <h3 class="text-lg font-semibold mb-4">All Recent Activities</h3>
-          <ul class="space-y-1 text-gray-300">
+        <div class="bg-gray-200 rounded shadow p-6 max-h-[80%] overflow-auto w-1/2">
+          <h3 class="text-lg font-semibold mb-4 text-gray-900">All Recent Activities</h3>
+          <ul class="space-y-1 text-gray-900">
             <li v-for="(activity, index) in recentActivity" :key="index">• {{ activity }}</li>
           </ul>
           <button @click="showModal = false" class="mt-4 px-4 py-2 bg-blue-500 rounded hover:bg-blue-400">Close</button>
@@ -277,7 +298,7 @@ onMounted(() => {
     </div>
 
     <!-- Sales Chart -->
-    <div class="flex-1 p-4 bg-gray-800 rounded shadow">
+    <div class="flex-1 p-4 bg-gray-100 rounded shadow text-gray-900">
       <h3 class="font-semibold mb-2">Sales Performance</h3>
       <VueApexCharts type="bar" :options="chartOptions" :series="series" height="100%" />
     </div>
